@@ -1,0 +1,109 @@
+##
+## Makefile for GUIslice library - LINUX
+## - Calvin Hass
+## - https://www.impulseadventure.com/elec/guislice-gui.html
+## - https://github.com/ImpulseAdventure/GUIslice
+##
+## NOTE: This Makefile handles both SDL1.2 and SDL2 compilation.
+##       A simpler Makefile can be used if this flexibility is
+##       not required.
+DEBUG = -O3
+CC = gcc
+INCLUDE =  -I./include    
+INCLUDE += -I/usr/include
+INCLUDE += -I./mongoose
+CFLAGS = $(DEBUG) -Wall $(INCLUDE) -Winline -pipe -g
+
+LDFLAGS = -L/usr/lib
+CXXFLAGS=
+GSLC_CORE = ./GUIslice/GUIslice.c ./GUIslice/GUIslice_ex.c ./include/GUIslice_config_linux.h
+MONGOOSE = ./mongoose/mongoose.c
+DS3231 = ./DS3231/DS3231.c
+I2C = ./DS3231/i2c.c
+COMPONENTS = ./cpu_usage.c ./mem_info.c ./config.c
+
+#INCLUDE += -I/opt/vc/include
+#INCLUDE += -I/opt/vc/include/interface/vcos/pthreads 
+#INCLUDE += -I/opt/vc/include/interface/vmcs_host/linux 
+#INCLUDE += -I./ 
+#INCLUDE += -I/opt/vc/src/hello_pi/libs/ilclient 
+#INCLUDE += -I/opt/vc/src/hello_pi/libs/vgfont
+
+#CFLAGS += -DSTANDALONE 
+#CFLAGS += -D__STDC_CONSTANT_MACROS 
+#CFLAGS += -D__STDC_LIMIT_MACROS 
+#CFLAGS += -DTARGET_POSIX 
+#CFLAGS += -D_LINUX 
+#CFLAGS += -fPIC 
+#CFLAGS += -DPIC 
+#CFLAGS += -D_REENTRANT 
+#CFLAGS += -D_LARGEFILE64_SOURCE 
+#CFLAGS += -D_FILE_OFFSET_BITS=64 
+#CFLAGS += -U_FORTIFY_SOURCE 
+#CFLAGS += -Wall -g 
+#CFLAGS += -DHAVE_LIBOPENMAX=2 
+#CFLAGS += -DOMX -DOMX_SKIP64BIT -ftree-vectorize -pipe -DUSE_EXTERNAL_OMX -DHAVE_LIBBCM_HOST -DUSE_EXTERNAL_LIBBCM_HOST -DUSE_VCHIQ_ARM -Wno-psabi
+CFLAGS += -DMG_ENABLE_SSL -lssl -lcrypto
+
+#LDFLAGS += -L/opt/vc/lib
+#LDFLAGS += -lbcm_host 
+#LDFLAGS += -lvcos 
+#LDFLAGS += -lvchiq_arm 
+#LDFLAGS += -lpthread 
+#LDFLAGS += -lrt 
+#LDFLAGS += -lm 
+#LDFLAGS += -L/opt/vc/src/hello_pi/libs/ilclient 
+#LDFLAGS += -L$/opt/vc/src/hello_pi/libs/vgfont
+
+# ---------------------------------------------------------------------------
+# Define compiler flags for GUIslice
+# - Select the graphics driver by uncommenting one of the following lines
+#   and edit GUIslice_config.h to set the appropriate #define DRV_DISP_*
+#   Example for SDL1:
+#     Makefile:            GSLC_DRV := SDL1
+#     GUIslice_config.h:   #define DRV_DISP_SDL1
+#
+# NOTE: One can also override this from the command-line as follows:
+#       make gslc-ex04 GSLC_DRV=SDL2
+#
+#GSLC_DRV := SDL1
+GSLC_DRV := SDL2
+
+# Define any extra linker settings
+# - For tslib (GUIslice_config.h has #define DRV_TOUCH_TSLIB), add "-lts"
+#GSLC_LDLIB_EXTRA := -lm
+GSLC_LDLIB_EXTRA := -lts -lwiringPi -lwiringPiDev -lconfig
+#GSLC_LDLIB_EXTRA += -lSDLmain -lSDL_image -lSDL_mixer -lSDL_gfx -lEGL -lGLESv2
+
+# === SDL1.2 ===
+ifeq (SDL1,${GSLC_DRV})
+  $(info GUIslice driver mode: SDL1)
+  GSLC_SRCS = ./GUIslice/GUIslice_drv_sdl.c
+  # - Add extra linker libraries if needed
+  LDLIBS += -lSDL -lSDL_ttf ${GSLC_LDLIB_EXTRA}
+endif
+
+# === SDL2.0 ===
+ifeq (SDL2,${GSLC_DRV})
+  $(info GUIslice driver mode: SDL2)
+  GSLC_SRCS = ./GUIslice/GUIslice_drv_sdl.c
+  # - Add extra linker libraries if needed
+  LDLIBS += -lSDL2 -lSDL2_ttf -lSDL2_image ${GSLC_LDLIB_EXTRA}
+endif
+
+# Examples that operate in all driver modes
+SRC =  	pi-nex.c
+
+OBJ = $(SRC:.c=.o)
+
+BINS = $(SRC:.c=)
+
+all: $(BINS)
+
+clean:
+	@echo "Cleaning directory..."
+	$(RM) $(BINS)
+
+pi-nex: pi-nex.c $(GSLC_CORE) $(GSLC_SRCS) $(COMPONENTS) $(DS3231) $(I2C) $(MONGOOSE)
+	@echo [Building $@]
+	@$(CC) $(CFLAGS) -o $@ pi-nex.c $(COMPONENTS) $(DS3231) $(I2C) $(MONGOOSE) $(GSLC_CORE) $(GSLC_SRCS) ${COMMONSRC} ${COMMONHDR} $(LDFLAGS) $(LDLIBS) -I .

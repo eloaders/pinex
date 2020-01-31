@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title><!--#call app_name --> | <!--#call page_sysinfo_title --></title>
+
+    <!-- Bootstrap -->
+    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    
+    <!-- Custom styling plus plugins -->
+    <link href="../build/css/custom.min.css" rel="stylesheet">
+  </head>
+
+  <body class="nav-sm">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="/" class="site_title"><i class="fa fa-paw"></i> <span><!--#call app_name --></span></a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <br />
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <h3>General</h3>
+                <ul class="nav side-menu">
+                  <li>
+		    <a href="index.html"><i class="fa fa-home"></i> <!--#call app_name --> <span class="fa fa-chevron-down"></span></a>
+                  </li>
+		  <li>
+		    <a href="page_temp.html"><i class="fa fa-desktop"></i> <!--#call page_temperature --> <span class="fa fa-chevron-down"></span></a>
+                  </li>
+		  <li>
+		    <a href="system_info.html"><i class="fa fa-desktop"></i> <!--#call page_sysinfo_title --> <span class="fa fa-chevron-down"></span></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- /sidebar menu -->
+          </div>
+        </div>
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3><!--#call page_sysinfo_title --></h3>
+              </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2><!--#call app_name --> <small> <!--#call app_name_more --> </small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <section class="content invoice">
+                      <!-- title row -->
+                      <div class="row">
+                        <div class="col-xs-12 invoice-header">
+                          <h1>
+                            <i class="fa fa-globe"></i> <!--#call app_name -->
+                            <small class="pull-right"> Version: <!--#call app_version --> </small>
+                          </h1>
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      <!-- info row -->
+                      <div class="row invoice-info">
+                        <div class="col-sm-4 invoice-col">
+                          Hardware info        
+                                          <br>
+					  <br><strong><span id="memory" class=""></span></strong>
+					  <br><strong><span id="processor" class=""></span></strong>
+					  <br><strong><span id="i2cDevice" class=""></span></strong>
+					  <br><strong><span id="model" class=""></span></strong>
+					  <br><strong><span id="manufacturer" class=""></span></strong>
+					  <br><strong><span id="pcb_revision" class=""></span></strong>
+					  <br><strong><span id="warranty_void" class=""></span></strong>
+					  <br><strong><span id="revision" class=""></span></strong>
+					  <br><strong><span id="peripheral_base" class=""></span></strong>
+					  <br><strong><span id="peripheral_base_match" class=""></span></strong>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-4 invoice-col">
+                          System Info
+					  <br>
+                                          <br><strong><span id="uname_sysname" class=""></span></strong>
+					  <br><strong><span id="uname_nodename" class=""></span></strong>
+					  <br><strong><span id="uname_release" class=""></span></strong>
+					  <br><strong><span id="uname_version" class=""></span></strong>
+					  <br><strong><span id="uname_machine" class=""></span></strong>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-4 invoice-col">
+                          <b>Invoice #007612</b>
+                          <br>
+                          <br>
+                          <b>Order ID:</b> 4F3S8J
+                          <br>
+                          <b>Payment Due:</b> 2/22/2014
+                          <br>
+                          <b>Account:</b> 968-34567
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      <!-- /.row -->
+
+                      <!-- Table row -->
+                      <div class="row">
+                        <div class="col-xs-12 table">
+                          
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      <!-- /.row -->
+
+                      <div class="row">
+                        <!-- accepted payments column -->
+                        <div class="col-xs-6">
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-xs-6">
+
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      <!-- /.row -->
+                    </section>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../vendors/nprogress/nprogress.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="../build/js/custom.js"></script>
+    <!-- PiInfo Theme Scripts -->
+    <script src="../build/js/piinfo.js"></script>
+  </body>
+</html>
